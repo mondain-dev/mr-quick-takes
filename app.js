@@ -27,7 +27,7 @@ async function extractComments(url){
     }
 }
 
-function filterComments(comments, threshold = config.threshold){
+function filterComments(comments, threshold = 200){
     let filtered = [];
     if(comments?.length){
         for(let comment of comments){
@@ -83,22 +83,29 @@ function addCommentID(url, commentID){
 var feed = config.source;
 let outputFeed = new RSS({title: config.title, feed_url: config.url, site_url: config.site});
 
-fetchPosts(feed).then( posts => {
+fetchPosts(feed, olderThan=config.olderThan, newerThan=config.newerThan).then(async posts => {
     for(let post of posts){
-        extractComments(post.link).then(filterComments).then(comments => {
+        await extractComments(post.link)
+        .then(comments => filterComments(comments, config.threshold))
+        .then(comments => {
             for(let comment of comments){
+                let urlComment = addCommentID(stripUtm(post.link), comment.id);
                 let item = {
-                    url: addCommentID(stripUtm(post.link), comment.id), 
+                    url: urlComment, 
                     title: "Comment on " + post.title + " by " + comment.author,
-                    description: comment.content,
+                    description:  comment.content
+                                + "<hr/>" 
+                                + `<p>Comment URL: <a href=\"${urlComment}\">${urlComment}</a></p>`
+                                + `<p>Post URL: <a href=\"${post.link}\">${post.link}</a></p>`
+                                + `<p>Votes: ${comment.updoots}⬆ ${comment.downboops}⬇</p>`,
                     date: new Date(comment.date + "-04:00"),
                     author: comment.author,
                 };
                 outputFeed.item(item);
             }
-        }).then(() => {
-            fs.writeFile('build/index.xml', outputFeed.xml(), function (err) {
-                if (err) return console.log(err);});
-        });
+        })
     }
-})
+}).then(() => {
+    fs.writeFile('build/index.xml', outputFeed.xml(), function (err) {
+        if (err) return console.log(err);});
+});
