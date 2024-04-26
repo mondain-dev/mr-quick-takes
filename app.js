@@ -98,7 +98,7 @@ fetchPosts(feed, olderThan=config.olderThan, newerThan=config.newerThan).then(as
                                 + `<p>Comment URL: <a href=\"${urlComment}\">${urlComment}</a></p>`
                                 + `<p>Post URL: <a href=\"${post.link}\">${post.link}</a></p>`
                                 + `<p>Votes: ${comment.updoots}⬆ ${comment.downboops}⬇</p>`,
-                    date: new Date(comment.date + "-04:00"),
+                    date: new Date(comment.date + config.timezone),
                     author: comment.author,
                 };
                 outputFeed.item(item);
