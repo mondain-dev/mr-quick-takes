@@ -34,7 +34,7 @@ function filterComments(comments, threshold = 200){
             if(comment.vote_total > threshold){
                 filtered.push(comment);
             }
-            filtered = filtered.concat(filterComments(comment.children));
+            filtered = filtered.concat(filterComments(comment.children, threshold));
         }
     }
     return filtered;
@@ -83,7 +83,7 @@ function addCommentID(url, commentID){
 var feed = config.source;
 let outputFeed = new RSS({title: config.title, feed_url: config.url, site_url: config.site});
 
-fetchPosts(feed, olderThan=config.olderThan, newerThan=config.newerThan).then(async posts => {
+fetchPosts(feed, config.olderThan, config.newerThan).then(async posts => {
     for(let post of posts){
         await extractComments(post.link)
         .then(comments => filterComments(comments, config.threshold))
