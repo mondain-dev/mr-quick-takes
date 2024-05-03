@@ -6,5 +6,8 @@
     "threshold": 100,
     "olderThan": 1,
     "newerThan": 2,
-    "timezone": "-04:00"
+    "timezone": "-04:00",
+    "include": ["Tyler", "TC"],
+    "excludeUser": ["dr. doolittle"],
+    "topK": 3
 }

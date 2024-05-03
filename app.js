@@ -27,15 +27,28 @@ async function extractComments(url){
     }
 }
 
-function filterComments(comments, threshold = 200){
-    let filtered = [];
-    if(comments?.length){
-        for(let comment of comments){
-            if(comment.vote_total > threshold){
-                filtered.push(comment);
-            }
-            filtered = filtered.concat(filterComments(comment.children, threshold));
+function commentsToList(comments){
+    let l = []
+    for(let comment of comments){
+        l.push(comment)
+        if(comment.children){
+            l = l.concat(commentsToList(comment.children))
         }
+    }
+    return l
+}
+
+function filterComments(comments, threshold = 200, topK=3, include=[], excludeUser=[]){
+    let filtered = comments?.length ? comments.filter(comment => !excludeUser.some(user => comment.author.toLowerCase().includes(user.toLowerCase()))) : [];
+    if(filtered.length){
+        let t = threshold
+        if(filtered.length > topK && topK > 0){
+            kth_vote_total = filtered.sort((a,b) => b.vote_total-a.vote_total).slice(0, topK)[topK-1].vote_total
+            t = Math.max(kth_vote_total, threshold)
+        }
+        return filtered.filter( 
+            comment => comment.vote_total >= t || (include.length && comment.vote_total >= threshold && comment.content.match(RegExp(`\\b(${include.join('|')})\\b`, 'gi')))
+        )
     }
     return filtered;
 }
@@ -86,7 +99,8 @@ let outputFeed = new RSS({title: config.title, feed_url: config.url, site_url: c
 fetchPosts(feed, config.olderThan, config.newerThan).then(async posts => {
     for(let post of posts){
         await extractComments(post.link)
-        .then(comments => filterComments(comments, config.threshold))
+        .then(commentsToList)
+        .then(comments => filterComments(comments, config.threshold, config.topK, config.include, config.excludeUser))
         .then(comments => {
             for(let comment of comments){
                 let urlComment = addCommentID(stripUtm(post.link), comment.id);
