@@ -39,18 +39,19 @@ function commentsToList(comments){
 }
 
 function filterComments(comments, threshold = 200, topK=3, include=[], excludeUser=[]){
-    let filtered = comments?.length ? comments.filter(comment => !excludeUser.some(user => comment.author.toLowerCase().includes(user.toLowerCase()))) : [];
-    if(filtered.length){
-        let t = threshold
-        if(filtered.length > topK && topK > 0){
-            kth_vote_total = filtered.sort((a,b) => b.vote_total-a.vote_total).slice(0, topK)[topK-1].vote_total
-            t = Math.max(kth_vote_total, threshold)
-        }
-        return filtered.filter( 
-            comment => comment.vote_total >= t || (include.length && comment.vote_total >= threshold && comment.content.match(RegExp(`\\b(${include.join('|')})\\b`, 'gi')))
+    let thresholded = comments?.length ? 
+        comments.filter(comment => 
+            comment.vote_total >= threshold && 
+            !excludeUser.some(user => comment.author.toLowerCase().includes(user.toLowerCase()))) : 
+        []
+    if(thresholded.length > topK && topK > 0){
+        let t =  thresholded.sort((a,b) => b.vote_total-a.vote_total).slice(0, topK)[topK-1].vote_total
+        return thresholded.filter( 
+            comment => comment.vote_total >= t || 
+            (include.length && comment.vote_total >= threshold && comment.content.match(RegExp(`\\b(${include.join('|')})\\b`, 'gi')))
         )
     }
-    return filtered;
+    return thresholded;
 }
 
 async function fetchPosts(feedUrl, olderThan=1, newerThan=2){
