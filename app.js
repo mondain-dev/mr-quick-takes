@@ -32,7 +32,7 @@ function commentsToList(comments){
     for(let comment of comments){
         l.push(comment)
         if(comment.children){
-            l = l.concat(commentsToList(comment.children))
+            l = l.concat(commentsToList(comment.children.map( c => { return {...c, parentAuthor: comment.author, parentContent: comment.content}} )))
         }
     }
     return l
@@ -108,7 +108,9 @@ fetchPosts(feed, config.olderThan, config.newerThan).then(async posts => {
                 let item = {
                     url: urlComment, 
                     title: "Comment on " + post.title + " by " + comment.author,
-                    description:  comment.content
+                    description:  (comment.parentAuthor ? `<p>Reply to ${comment.parentAuthor}:</p>` : '')
+                                + (comment.parentContent ? `<blockquote>${comment.parentContent}</blockquote>` : '')
+                                + comment.content
                                 + "<hr/>" 
                                 + `<p>Comment URL: <a href=\"${urlComment}\">${urlComment}</a></p>`
                                 + `<p>Post URL: <a href=\"${post.link}\">${post.link}</a></p>`
