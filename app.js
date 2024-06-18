@@ -42,8 +42,8 @@ function filterComments(comments, threshold = 200, topK=3, include=[], excludeUs
     let thresholded = comments?.length ? 
         comments.filter(comment => 
             comment.vote_total >= threshold && 
-            !excludeUser.some(user => comment.author.toLowerCase().includes(user.toLowerCase()))) : 
-        []
+            !excludeUser.some(user => comment.author.toLowerCase().includes(user.toLowerCase()))
+            ) : []
     if(thresholded.length > topK && topK > 0){
         let t =  thresholded.sort((a,b) => b.vote_total-a.vote_total).slice(0, topK)[topK-1].vote_total
         return thresholded.filter( 
@@ -98,28 +98,55 @@ var feed = config.source;
 let outputFeed = new RSS({title: config.title, feed_url: config.url, site_url: config.site});
 
 fetchPosts(feed, config.olderThan, config.newerThan).then(async posts => {
+    // collect posts and comments
+    let postsAndComments = []
     for(let post of posts){
-        await extractComments(post.link)
-        .then(commentsToList)
-        .then(comments => filterComments(comments, config.threshold, config.topK, config.include, config.excludeUser))
-        .then(comments => {
-            for(let comment of comments){
-                let urlComment = addCommentID(stripUtm(post.link), comment.id);
-                let item = {
-                    url: urlComment, 
-                    title: "Comment on " + post.title + " by " + comment.author,
-                    description:  (comment.parentAuthor ? `<p>Reply to ${comment.parentAuthor}:</p>` : '')
-                                + (comment.parentContent ? `<blockquote>${comment.parentContent}</blockquote>` : '')
-                                + comment.content
-                                + "<hr/>" 
-                                + `<p>Comment URL: <a href=\"${urlComment}\">${urlComment}</a></p>`
-                                + `<p>Post URL: <a href=\"${post.link}\">${post.link}</a></p>`
-                                + `<p>Votes: ${comment.updoots}⬆ ${comment.downboops}⬇</p>`,
-                    date: new Date(comment.date + config.timezone),
-                    author: comment.author,
-                };
-                outputFeed.item(item);
-            }
+        let comment_list = await extractComments(post.link).then(commentsToList)
+        postsAndComments.push({post, comment_list})
+    }
+
+    // calculate threshold (max + mean + 3*std)/2
+    let voteData = postsAndComments.map(p => p.comment_list).flat().map(comment => comment.vote_total)
+    let N  = voteData.length
+    let threshold = config.threshold_max
+    if(N > 1){
+        let s  = voteData.reduce((a,b) => a+b)
+        let ss = voteData.reduce((a,b) => a+b*b)
+        let max_votes = voteData.reduce((a,b) => {if(a > b){return a} return b})
+        let sd = Math.sqrt((1/(N-1))*(ss - ((s*s)/N)))
+        let m  = s/N
+        threshold = 0.5 * (max_votes + m + 3*sd)
+
+        // clip threshold
+        if(threshold < config.threshold_min){
+            threshold = config.threshold_min
+        }
+        if(threshold > config.threshold_max){
+            threshold = config.threshold_max
+        }
+    }
+
+    // filter comments by votes
+    for(let p of postsAndComments){
+        let post     = p.post
+        let comments = p.comment_list
+        filterComments(comments, threshold, config.topK, config.include, config.excludeUser)
+        .forEach(comment => {
+            let urlComment = addCommentID(stripUtm(post.link), comment.id);
+            let item = {
+                url: urlComment, 
+                title: "Comment on " + post.title + " by " + comment.author,
+                description:  (comment.parentAuthor ? `<p>Reply to ${comment.parentAuthor}:</p>` : '')
+                            + (comment.parentContent ? `<blockquote>${comment.parentContent}</blockquote>` : '')
+                            + comment.content
+                            + "<hr/>" 
+                            + `<p>Comment URL: <a href=\"${urlComment}\">${urlComment}</a></p>`
+                            + `<p>Post URL: <a href=\"${post.link}\">${post.link}</a></p>`
+                            + `<p>Votes: ${comment.updoots}⬆ ${comment.downboops}⬇</p>`,
+                date: new Date(comment.date + config.timezone),
+                author: comment.author,
+            };
+            outputFeed.item(item);
         })
     }
 }).then(() => {
