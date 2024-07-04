@@ -54,6 +54,29 @@ function filterComments(comments, threshold = 200, topK=3, include=[], excludeUs
     return thresholded;
 }
 
+function calculateThreshold(voteData, threshold_min, threshold_max){
+    let threshold = threshold_max
+
+    let N  = voteData.length
+    if(N > 1){
+        let s  = voteData.reduce((a,b) => a+b)
+        let ss = voteData.reduce((a,b) => a+b*b)
+        let max_votes = voteData.reduce((a,b) => {if(a > b){return a} return b})
+        let sd = Math.sqrt((1/(N-1))*(ss - ((s*s)/N)))
+        let m  = s/N
+        threshold = 0.5 * (max_votes + m + 3*sd)
+        
+        // clip threshold
+        if(threshold < threshold_min){
+            threshold = threshold_min
+        }
+        if(threshold > threshold_max){
+            threshold = threshold_max
+        }
+    }
+    return threshold
+}
+
 async function fetchPosts(feedUrl, olderThan=1, newerThan=2){
     let posts = []; 
     await rssParser.parseURL(feedUrl).then( async (feedContent) => {
@@ -107,24 +130,7 @@ fetchPosts(feed, config.olderThan, config.newerThan).then(async posts => {
 
     // calculate threshold (max + mean + 3*std)/2
     let voteData = postsAndComments.map(p => p.comment_list).flat().map(comment => comment.vote_total)
-    let N  = voteData.length
-    let threshold = config.threshold_max
-    if(N > 1){
-        let s  = voteData.reduce((a,b) => a+b)
-        let ss = voteData.reduce((a,b) => a+b*b)
-        let max_votes = voteData.reduce((a,b) => {if(a > b){return a} return b})
-        let sd = Math.sqrt((1/(N-1))*(ss - ((s*s)/N)))
-        let m  = s/N
-        threshold = 0.5 * (max_votes + m + 3*sd)
-
-        // clip threshold
-        if(threshold < config.threshold_min){
-            threshold = config.threshold_min
-        }
-        if(threshold > config.threshold_max){
-            threshold = config.threshold_max
-        }
-    }
+    let threshold = calculateThreshold(voteData, config.threshold_max, config.threshold_min)
 
     // filter comments by votes
     for(let p of postsAndComments){
