@@ -15,7 +15,7 @@ async function getHTMLScraper(url){
     let endpoint = new URL(config.endpointScraper); 
     endpoint.searchParams.append("x-api-key", process.env.SCRAPER_API_KEY);
     endpoint.searchParams.append("url", url);
-    endpoint.searchParams.append("browser", false);
+    endpoint.searchParams.append("browser", "false");
     let html = ''
     try{
         let res = await fetch(endpoint.href);
@@ -39,6 +39,7 @@ async function extractComments(url){
         let comments = JSON.parse($('.comment_thread').first().attr('data-json'));
         return comments
     }
+    return [];
 }
 
 function commentsToList(comments){
