@@ -15,6 +15,7 @@ async function getHTMLScraper(url){
     let endpoint = new URL(config.endpointScraper); 
     endpoint.searchParams.append("x-api-key", process.env.SCRAPER_API_KEY);
     endpoint.searchParams.append("url", url);
+    endpoint.searchParams.append("browser", false);
     let html = ''
     try{
         let res = await fetch(endpoint.href);
