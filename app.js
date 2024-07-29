@@ -11,14 +11,27 @@ const RSS = require('rss');
 
 config = require('./config.json')
 
-async function extractComments(url){
-    let html = '';
+async function getHTMLScraper(url){
+    let endpoint = new URL(config.endpointScraper); 
+    endpoint.searchParams.append("x-api-key", process.env.SCRAPER_API_KEY);
+    endpoint.searchParams.append("url", url);
+    let html = ''
     try{
-        let res = await fetch(url, {headers: {'User-Agent': 'facebookexternalhit'}});
+        let res = await fetch(endpoint.href);
         let buf = Buffer.from(await res.arrayBuffer());
         html = whatwgEncoding.decode(buf, htmlEncodingSniffer(buf, {defaultEncoding: 'UTF-8'}));
     }
+    catch(e){}
+    return html;
+}
+
+async function extractComments(url){
+    let html = '';
+    try{
+        html = await getHTMLScraper(url)
+    }
     catch(e){
+        console.log(e)
     }
     const $ = cheerio.load(html);
     if($('.comment_thread').length){
