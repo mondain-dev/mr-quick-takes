@@ -1,4 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[MR Quick Takes]]></title><description><![CDATA[MR Quick Takes]]></description><link>https://github.com/mondain-dev/mr-quick-takes</link><generator>RSS for Node</generator><lastBuildDate>Tue, 20 Aug 2024 22:07:51 GMT</lastBuildDate><atom:link href="https://mondain-dev.github.io/mr-quick-takes/index.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Comment on Monday assorted links by Hazel Meade]]></title><description><![CDATA[<p>7. Reminds me a lot of the story of Red Delicious Apples. People bred apples for color rather than taste to the point that one day consumers were like "why are we buying these tasteless apples? I want old fashioned apples that taste good, who cares about color!"<br />
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[MR Quick Takes]]></title><description><![CDATA[MR Quick Takes]]></description><link>https://github.com/mondain-dev/mr-quick-takes</link><generator>RSS for Node</generator><lastBuildDate>Wed, 21 Aug 2024 10:08:35 GMT</lastBuildDate><atom:link href="https://mondain-dev.github.io/mr-quick-takes/index.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Comment on Which books and blogs are in the Silicon Valley canon? by Logan]]></title><description><![CDATA[<p>Hopefully this doesn't run afoul of comment word limits - here is Patrick Collision's list sorted by year of publication with blurbs.</p>
+<p>Zen and the Art of Motorcycle Maintenance (1974)<br />
+A philosophical exploration of the meaning of quality and the relationship between technology and life.</p>
+<p>The Whole Earth Catalog (1968)<br />
+A counterculture publication that provided tools and resources for self-sufficiency and ecological living.</p>
+<p>The Selfish Gene (1976)<br />
+Introduces the concept of the gene-centered view of evolution, emphasizing the role of genes in shaping behavior.</p>
+<p>A Pattern Language (1977)<br />
+Presents a framework for designing buildings and urban spaces that promote human well-being.</p>
+<p>The Rise of Theodore Roosevelt (1979)<br />
+A biography that traces the early life and career of Theodore Roosevelt, highlighting his achievements and challenges.</p>
+<p>Gödel, Escher, Bach (1979)<br />
+Explores the connections between the works of mathematician Kurt Gödel, artist M.C. Escher, and composer Johann Sebastian Bach.</p>
+<p>The Mythical Man-Month (1975)<br />
+Explores the challenges of software project management, emphasizing that adding manpower to a late project often delays it further.</p>
+<p>Mindstorms (1980)<br />
+Highlights the educational potential of programmable robots and the impact of constructionist learning theories.</p>
+<p>The Tinkerings of Robert Noyce (1983)<br />
+Chronicles the life of Robert Noyce, co-founder of Intel, and his pivotal role in the creation of Silicon Valley.</p>
+<p>The Big Score (1984)<br />
+Explores the rise of Silicon Valley and the key players who shaped its development.</p>
+<p>Surely You’re Joking, Mr Feynman (1985)<br />
+A collection of humorous and insightful anecdotes from the life of Nobel Prize-winning physicist Richard Feynman.</p>
+<p>Structure and Interpretation of Computer Programs (1985)<br />
+A foundational text in computer science, emphasizing the importance of abstraction and modularity in programming.</p>
+<p>Finite and Infinite Games (1986)<br />
+Explores the concept of life as a series of games, distinguishing between finite and infinite approaches.</p>
+<p>The Making of the Atomic Bomb (1986)<br />
+Provides a comprehensive history of the development of the atomic bomb and its impact on the world.</p>
+<p>The Cathedral and the Bazaar (1999)<br />
+Explores the contrasting models of software development: the centralized “cathedral” and the decentralized “bazaar.”</p>
+<p>The Diamond Age (1995)<br />
+A science fiction novel that explores the impact of nanotechnology on society and culture.</p>
+<p>The Power Broker (1974)<br />
+Examines the life and career of Robert Moses, a powerful urban planner who shaped New York City.</p>
+<p>The Sovereign Individual (1997)<br />
+Predicts the rise of individual autonomy and the decline of nation-states in the digital age.</p>
+<p>Seeing Like a State (1998)<br />
+Examines how governments attempt to simplify and control societies, often leading to unintended consequences.</p>
+<p>Titan (on Rockefeller) (1998)<br />
+A comprehensive biography of John D. Rockefeller, detailing his rise to become one of the wealthiest individuals in history.</p>
+<p>Dealers of Lightning (1999)<br />
+Chronicles the innovations and culture of Xerox PARC, a hub of technological breakthroughs.</p>
+<p>The Dream Machine (2001)<br />
+Explores the vision of J.C.R. Licklider and his influence on the development of personal computing and the internet.</p>
+<p>Revolution in the Valley (2004)<br />
+Chronicles the development of the Apple Macintosh and the people who brought it to life.</p>
+<p>The PayPal Wars (2004)<br />
+Details the early days of PayPal and the challenges faced by its founders in building a successful online payment platform.</p>
+<p>What the Dormouse Said (2005)<br />
+Chronicles the countercultural roots of the personal computer revolution in the 1960s and 1970s.</p>
+<p>Founders at Work (2007)<br />
+Features interviews with successful startup founders, revealing their challenges and triumphs.</p>
+<p>Thinking in Systems (2008)<br />
+Introduces the principles of systems thinking and how they can be applied to solve complex problems.</p>
+<p>LessWrong (2009)<br />
+A community blog focused on rationality, cognitive science, and effective altruism.</p>
+<p>The Lean Startup (2011)<br />
+Advocates for a scientific approach to building and scaling startups, focusing on rapid experimentation and iteration.</p>
+<p>The Beginning of Infinity (2011)<br />
+Argues that the pursuit of knowledge is an infinite process that drives human progress and innovation.</p>
+<p>Superintelligence (2014)<br />
+Examines the potential risks and benefits of artificial intelligence surpassing human intelligence.</p>
+<p>Zero to One (2014)<br />
+Offers insights on building innovative startups and creating new markets, based on Peter Thiel’s experiences.</p>
+<p>The Hard Thing about Hard Things (2014)<br />
+Shares practical advice on managing and scaling startups, based on Ben Horowitz’s experiences as a CEO.</p>
+<p>The Rise and Fall of American Growth (2016)<br />
+Analyzes the economic growth of the United States from the 1870s to the present, highlighting key innovations and challenges.</p>
+<p>Marginal Revolution (Stubborn Attachments) (2018)<br />
+Explores the importance of long-term thinking and sustainable economic growth.</p>
+<p>Uncanny Valley (2020)<br />
+A memoir that explores the author’s experiences working in Silicon Valley and the tech industry’s culture.</p>
+<p>Softwar (2023)<br />
+Discusses the strategic significance of Bitcoin and its potential impact on global power dynamics.</p>
+<hr/><p>Comment URL: <a href="https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?commentID=160801190">https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?commentID=160801190</a></p><p>Post URL: <a href="https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?utm_source=rss&utm_medium=rss&utm_campaign=which-books-and-blogs-are-in-the-silicon-valley-canon">https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?utm_source=rss&utm_medium=rss&utm_campaign=which-books-and-blogs-are-in-the-silicon-valley-canon</a></p><p>Votes: 78⬆ 0⬇</p>]]></description><link>https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?commentID=160801190</link><guid isPermaLink="true">https://marginalrevolution.com/marginalrevolution/2024/08/which-books-and-blogs-are-in-the-silicon-valley-canon.html?commentID=160801190</guid><dc:creator><![CDATA[Logan]]></dc:creator><pubDate>Tue, 20 Aug 2024 08:41:19 GMT</pubDate></item><item><title><![CDATA[Comment on Monday assorted links by Hazel Meade]]></title><description><![CDATA[<p>7. Reminds me a lot of the story of Red Delicious Apples. People bred apples for color rather than taste to the point that one day consumers were like "why are we buying these tasteless apples? I want old fashioned apples that taste good, who cares about color!"<br />
 Similarly, the market has been on autopilot making toiler paper softer and softer, assuming that consumers are always going to want an <i>even softer</i> piece of paper to wipe their ass with.<br />
 But it's not like ALL the toilet paper brands are doing this. Scott tissues advertises 1000 sheets per roll. Just buy that.</p>
 <hr/><p>Comment URL: <a href="https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?commentID=160800122">https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?commentID=160800122</a></p><p>Post URL: <a href="https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-470">https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?utm_source=rss&utm_medium=rss&utm_campaign=monday-assorted-links-470</a></p><p>Votes: 237⬆ 4⬇</p>]]></description><link>https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?commentID=160800122</link><guid isPermaLink="true">https://marginalrevolution.com/marginalrevolution/2024/08/monday-assorted-links-470.html?commentID=160800122</guid><dc:creator><![CDATA[Hazel Meade]]></dc:creator><pubDate>Mon, 19 Aug 2024 20:11:32 GMT</pubDate></item><item><title><![CDATA[Comment on Monday assorted links by Irony?]]></title><description><![CDATA[<p>1. Related to Cowen's post on credentialing, I can't think of any reason why this paper would need 5 authors.</p>
