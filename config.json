@@ -2,7 +2,7 @@
     "title": "MR Quick Takes",
     "url": "https://mondain-dev.github.io/mr-quick-takes/index.xml",
     "site": "https://github.com/mondain-dev/mr-quick-takes",
-    "source": "https://feeds.feedburner.com/marginalrevolution",
+    "source": "https://marginalrevolution.com/feed",
     "threshold_max": 100,
     "threshold_min": 40,
     "olderThan": 1,
